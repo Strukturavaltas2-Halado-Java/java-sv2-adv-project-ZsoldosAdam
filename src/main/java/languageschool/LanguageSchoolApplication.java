@@ -1,5 +1,7 @@
 package languageschool;
 
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.boot.SpringApplication;
@@ -18,5 +20,13 @@ public class LanguageSchoolApplication {
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         return modelMapper;
+    }
+
+    @Bean
+    public OpenAPI customOpenAPI() {
+        return new OpenAPI().info(new Info()
+                        .title("Language School API")
+                        .version("1.0.0")
+                        .description("Operations with language tutors and lessons"));
     }
 }

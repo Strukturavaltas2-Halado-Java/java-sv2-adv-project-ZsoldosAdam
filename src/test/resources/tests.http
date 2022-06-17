@@ -1,0 +1,91 @@
+### List tutors
+GET http://localhost:8080/api/tutors
+Accept: application/json
+
+### List tutors by name
+GET http://localhost:8080/api/tutors?name=ja
+Accept: application/json
+
+### Find tutor by id
+GET http://localhost:8080/api/tutors/1
+Accept: application/json
+
+### Find tutor's salary by month
+GET http://localhost:8080/api/tutors/1/salary/6
+Accept: application/json
+
+### Create tutor
+POST http://localhost:8080/api/tutors
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "Jane Doe",
+  "hourlyRate": 24.50
+}
+
+### Update tutor name
+PUT http://localhost:8080/api/tutors/1/name
+Content-Type: application/json
+Accept: application/json
+
+{
+  "name": "Jill Poe"
+}
+
+### Update tutor hourly rate
+PUT http://localhost:8080/api/tutors/1/hourly-rate
+Content-Type: application/json
+Accept: application/json
+
+{
+  "hourlyRate": 26.20
+}
+
+### Add tutor language
+PUT http://localhost:8080/api/tutors/1/languages
+Content-Type: application/json
+Accept: application/json
+
+{
+  "language": "KOREAN",
+  "level": "FLUENT"
+}
+
+### Delete tutor
+DELETE http://localhost:8080/api/tutors/2
+Accept: application/json
+
+### Create lesson
+POST http://localhost:8080/api/lessons
+Content-Type: application/json
+Accept: application/json
+
+{
+  "tutorId": 1,
+  "language": "JAPANESE",
+  "start": "2022-06-01T10:00",
+  "duration": 0.5
+}
+
+### List lessons
+GET http://localhost:8080/api/lessons
+Accept: application/json
+
+### List lessons by language
+GET http://localhost:8080/api/lessons?language=JAPANESE&level=NONE
+Accept: application/json
+
+### Update lesson time schedule
+PUT http://localhost:8080/api/lessons/1/time-schedule
+Content-Type: application/json
+Accept: application/json
+
+{
+  "start": "2022-06-01T11:00",
+  "duration": 1
+}
+
+### Delete lesson
+DELETE http://localhost:8080/api/lessons/2
+Accept: application/json

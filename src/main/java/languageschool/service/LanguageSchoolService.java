@@ -67,6 +67,7 @@ public class LanguageSchoolService {
 
     @Transactional
     public void deleteTutorById(long id) {
+        lessonRepository.deleteAll(getTutorById(id).getLessons());
         tutorRepository.deleteById(id);
     }
 
