@@ -1,0 +1,1 @@
+docker run -d -e MYSQL_DATABASE=language_school -e MYSQL_USER=language_school -e MYSQL_PASSWORD=language_school -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -p 3306:3306 --name language-school-mariadb mariadb
