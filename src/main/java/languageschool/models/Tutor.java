@@ -1,12 +1,10 @@
 package languageschool.models;
 
-import languageschool.exceptions.IllegalMonthException;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.DateTimeException;
 import java.time.Month;
 import java.util.*;
 
@@ -57,15 +55,11 @@ public class Tutor {
     }
 
     public double getSalary(int month) {
-        try {
-            Month enumMonth = Month.of(month);
-            double totalHours = lessons.stream()
-                    .filter(l -> l.getStart().getMonth() == enumMonth)
-                    .mapToDouble(Lesson::getDuration)
-                    .sum();
-            return totalHours * hourlyRate;
-        } catch (DateTimeException e) {
-            throw new IllegalMonthException(month);
-        }
+        Month enumMonth = Month.of(month);
+        double totalHours = lessons.stream()
+                .filter(l -> l.getStart().getMonth() == enumMonth)
+                .mapToDouble(Lesson::getDuration)
+                .sum();
+        return totalHours * hourlyRate;
     }
 }
