@@ -22,7 +22,7 @@ import java.util.Objects;
 import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class TutorControllerTest {
+class TutorControllerIT {
 
     @Autowired
     WebTestClient webClient;
@@ -149,6 +149,29 @@ class TutorControllerTest {
                 .extracting(Problem::getType, Problem::getTitle, Problem::getStatus, Problem::getDetail)
                 .containsExactly(URI.create("tutors/not-found"), "Not found", Status.NOT_FOUND,
                         String.format("Tutor not found by ID %d", tutorId));
+    }
+
+    @Test
+    void testFindWithLessonsById() {
+        webClient.post().uri("/api/lessons")
+                .bodyValue(new CreateLessonCommand(tutorId, Language.GERMAN,
+                        LocalDateTime.parse("2022-05-02T12:00"), 0.8))
+                .exchange();
+        webClient.post().uri("/api/lessons")
+                .bodyValue(new CreateLessonCommand(tutorId, Language.KOREAN,
+                        LocalDateTime.parse("2022-05-03T11:30"), 0.7))
+                .exchange();
+        TutorDto tutor = webClient.get().uri("/api/tutors/{id}", tutorId).exchange()
+                .expectStatus().isOk()
+                .expectBody(TutorDto.class).returnResult().getResponseBody();
+        assertThat(tutor).isNotNull();
+        assertThat(tutor.getLessons())
+                .hasSize(2)
+                .extracting(TutorLessonDto::getLanguage, TutorLessonDto::getStart, TutorLessonDto::getDuration)
+                .containsOnly(
+                        tuple(Language.GERMAN, LocalDateTime.parse("2022-05-02T12:00"), 0.8),
+                        tuple(Language.KOREAN, LocalDateTime.parse("2022-05-03T11:30"), 0.7)
+                );
     }
 
     @Test
