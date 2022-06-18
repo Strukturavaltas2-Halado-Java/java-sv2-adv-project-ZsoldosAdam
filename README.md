@@ -1,5 +1,11 @@
 # Nyelviskola webszolgáltatás projekt
 
+Az alkalmazás egy nyelviskola nyílvántartási rendszeréhez valósítja meg a backendet, amelyen keresztül adatbázisba rögzíthetők, lekérhetők és karbantarthatók nyelvtanárokhoz és tanórákhoz tartozó nyílvántartási adatok.
+
+A languageschool egy háromrétegű alkalmazás amely controller, service és repository rétegekből áll és REST API architektúrát valósít meg.
+
+Az alkalmazás MariaDB adatbázishoz kapcsolódik.
+
 ## Entitások
 
 - **Tutor**
@@ -41,11 +47,11 @@
     - `/api/tutors/{id}/salary/{month}`
         - *GET:* Fizetés lekérése adott hónapra ID alapján
     - `/api/tutors/{id}/name`
-        - *PUT:* Név felülírása ID alapján
+        - *PUT:* Név rögzítése ID alapján
     - `/api/tutors/{id}/hourly-rate`
-        - *PUT:* Óradíj felülírása ID alapján
+        - *PUT:* Óradíj rögzítése ID alapján
     - `/api/tutors/{id}/languages`
-        - *PUT:* Nyelv hozzáadása/törlése ID alapján
+        - *PUT:* Beszélt nyelvek rögzítése vagy törlése ID alapján
 - **LessonController**
     - `/api/lessons`
         - *GET:* Listázás nyelv és/vagy nyelvszint alapján
@@ -54,4 +60,4 @@
         - *GET:* Lekérés ID alapján
         - *DELETE:* Törlés ID alapján
     - `/api/lessons/{id}/time-schedule`
-        - *PUT:* Indulási idő és időtartam felülírása ID alapján
+        - *PUT:* Indulási idő és időtartam rögzítése ID alapján
