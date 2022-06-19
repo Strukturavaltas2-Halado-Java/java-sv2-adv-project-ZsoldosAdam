@@ -2,7 +2,7 @@
 
 Az alkalmazás egy nyelviskola nyílvántartási rendszeréhez valósítja meg a backendet, amelyen keresztül adatbázisba rögzíthetők, lekérhetők és karbantarthatók nyelvtanárokhoz és tanórákhoz tartozó nyílvántartási adatok.
 
-A languageschool egy háromrétegű alkalmazás amely controller, service és repository rétegekből áll és REST API architektúrát valósít meg.
+A languageschool egy háromrétegű alkalmazás, amely controller, service és repository rétegekből áll és RESTful API architektúrát valósít meg.
 
 Az alkalmazás MariaDB adatbázishoz kapcsolódik.
 
@@ -16,10 +16,10 @@ Az alkalmazás MariaDB adatbázishoz kapcsolódik.
     - hourlyRate: *double*
 - **Lesson**
     - id: *Long*
-    - name: *String*
-    - languages: *Map\<Language, LanguageLevel>*
-    - lessons: *List\<Lesson>*
-    - hourlyRate: *double*
+    - tutor: *Tutor*
+    - language: *Language*
+    - start: *LocalDateTime*
+    - duration: *double*
 
 ## Enumok
 
