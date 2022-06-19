@@ -71,7 +71,7 @@ public class LanguageSchoolService {
             lessonRepository.deleteAll(getTutorById(id).getLessons());
             tutorRepository.deleteById(id);
         } catch (TutorNotFoundException e) {
-            // Tutor not found, further action unnecessary
+            // Tutor not found, no action necessary
         }
     }
 
