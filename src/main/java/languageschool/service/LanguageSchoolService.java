@@ -33,8 +33,8 @@ public class LanguageSchoolService {
         return modelMapper.map(getTutorById(id), TutorDto.class);
     }
 
-    public double findTutorSalaryById(long id, int month) {
-        return getTutorById(id).getSalary(month);
+    public double findTutorSalaryById(long id, int year, int month) {
+        return getTutorById(id).getSalary(year, month);
     }
 
     @Transactional
@@ -67,8 +67,12 @@ public class LanguageSchoolService {
 
     @Transactional
     public void deleteTutorById(long id) {
-        lessonRepository.deleteAll(getTutorById(id).getLessons());
-        tutorRepository.deleteById(id);
+        try {
+            lessonRepository.deleteAll(getTutorById(id).getLessons());
+            tutorRepository.deleteById(id);
+        } catch (TutorNotFoundException e) {
+            // Tutor not found, further action unnecessary
+        }
     }
 
     public List<LessonDto> findLessons(Optional<Language> language, Optional<LanguageLevel> level) {

@@ -44,8 +44,8 @@ Az alkalmazás MariaDB adatbázishoz kapcsolódik.
     - `/api/tutors/{id}`
         - *GET:* Lekérés ID alapján
         - *DELETE:* Törlés ID alapján
-    - `/api/tutors/{id}/salary/{month}`
-        - *GET:* Fizetés lekérése adott hónapra ID alapján
+    - `/api/tutors/{id}/salary/{year}/{month}`
+        - *GET:* Fizetés lekérése adott évre és hónapra ID alapján
     - `/api/tutors/{id}/name`
         - *PUT:* Név rögzítése ID alapján
     - `/api/tutors/{id}/hourly-rate`

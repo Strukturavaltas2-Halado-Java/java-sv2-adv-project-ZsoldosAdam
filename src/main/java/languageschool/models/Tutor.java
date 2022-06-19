@@ -54,10 +54,10 @@ public class Tutor {
         lesson.setTutor(this);
     }
 
-    public double getSalary(int month) {
+    public double getSalary(int year, int month) {
         Month enumMonth = Month.of(month);
         double totalHours = lessons.stream()
-                .filter(l -> l.getStart().getMonth() == enumMonth)
+                .filter(l -> l.getStart().getYear() == year && l.getStart().getMonth() == enumMonth)
                 .mapToDouble(Lesson::getDuration)
                 .sum();
         return totalHours * hourlyRate;

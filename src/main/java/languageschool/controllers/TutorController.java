@@ -46,14 +46,15 @@ public class TutorController {
         return service.findTutorById(id);
     }
 
-    @GetMapping("/{id}/salary/{month}")
+    @GetMapping("/{id}/salary/{year}/{month}")
     @ResponseStatus(HttpStatus.OK)
-    @Operation(summary = "Finds tutor's salary on specified month by ID")
+    @Operation(summary = "Finds tutor's salary for specified month by ID")
     @ApiResponse(responseCode = "200", description = "Tutor salary sent")
-    @ApiResponse(responseCode = "400", description = "Illegal month argument")
     @ApiResponse(responseCode = "404", description = "Tutor not found")
-    public double findSalaryById(@PathVariable("id") long id, @PathVariable("month") int month) {
-        return service.findTutorSalaryById(id, month);
+    public double findSalaryById(@PathVariable("id") long id,
+                                 @PathVariable("year") int year,
+                                 @PathVariable("month") int month) {
+        return service.findTutorSalaryById(id, year, month);
     }
 
     @PostMapping

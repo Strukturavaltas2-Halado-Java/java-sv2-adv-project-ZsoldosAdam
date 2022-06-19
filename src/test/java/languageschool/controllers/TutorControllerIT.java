@@ -155,12 +155,10 @@ class TutorControllerIT {
     void testFindWithLessonsById() {
         webClient.post().uri("/api/lessons")
                 .bodyValue(new CreateLessonCommand(tutorId, Language.GERMAN,
-                        LocalDateTime.parse("2022-05-02T12:00"), 0.8))
-                .exchange();
+                        LocalDateTime.parse("2022-05-02T12:00"), 0.8)).exchange();
         webClient.post().uri("/api/lessons")
                 .bodyValue(new CreateLessonCommand(tutorId, Language.KOREAN,
-                        LocalDateTime.parse("2022-05-03T11:30"), 0.7))
-                .exchange();
+                        LocalDateTime.parse("2022-05-03T11:30"), 0.7)).exchange();
         TutorDto tutor = webClient.get().uri("/api/tutors/{id}", tutorId).exchange()
                 .expectStatus().isOk()
                 .expectBody(TutorDto.class).returnResult().getResponseBody();
@@ -178,13 +176,17 @@ class TutorControllerIT {
     void testFindSalaryById() {
         webClient.post().uri("/api/lessons")
                 .bodyValue(new CreateLessonCommand(tutorId, Language.GERMAN,
-                        LocalDateTime.parse("2022-05-02T12:00"), 0.8))
-                .exchange();
+                        LocalDateTime.parse("2022-05-02T12:00"), 0.8)).exchange();
         webClient.post().uri("/api/lessons")
                 .bodyValue(new CreateLessonCommand(tutorId, Language.KOREAN,
-                        LocalDateTime.parse("2022-05-03T11:30"), 0.7))
-                .exchange();
-        Double salary = webClient.get().uri("/api/tutors/{id}/salary/5", tutorId).exchange()
+                        LocalDateTime.parse("2022-05-03T11:30"), 0.7)).exchange();
+        webClient.post().uri("/api/lessons")
+                .bodyValue(new CreateLessonCommand(tutorId, Language.GERMAN,
+                        LocalDateTime.parse("2021-05-04T11:00"), 1.0)).exchange();
+        webClient.post().uri("/api/lessons")
+                .bodyValue(new CreateLessonCommand(tutorId, Language.GERMAN,
+                        LocalDateTime.parse("2022-06-01T10:30"), 1.0)).exchange();
+        Double salary = webClient.get().uri("/api/tutors/{id}/salary/2022/5", tutorId).exchange()
                 .expectStatus().isOk()
                 .expectBody(Double.class).returnResult().getResponseBody();
         assertThat(salary).isCloseTo(36.9, within(0.0005));
