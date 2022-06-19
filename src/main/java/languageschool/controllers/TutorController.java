@@ -32,8 +32,8 @@ public class TutorController {
     @Operation(summary = "Searches tutors by name, language and language level")
     @ApiResponse(responseCode = "200", description = "Tutors sent")
     public List<TutorDto> find(@RequestParam Optional<String> name,
-                                 @RequestParam Optional<Language> language,
-                                 @RequestParam Optional<LanguageLevel> level) {
+                               @RequestParam Optional<Language> language,
+                               @RequestParam Optional<LanguageLevel> level) {
         return service.findTutors(name, language, level);
     }
 
